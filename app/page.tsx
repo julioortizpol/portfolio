@@ -1,3 +1,4 @@
+import About from './components/About'
 import Header from './components/Header'
 const techs = ['React', 'Node', 'JavaScript', 'React-Native', 'Redux']
 const stacks = [
@@ -38,7 +39,9 @@ export default function Home() {
   return (
     <div className="bg-white">
       <Header />
+      <About />
       <div className="relative isolate px-6 pt-14 lg:px-8 w-full">
+       
         <div className="mx-auto py-32 ">
           <div className="text-center">
             <h1 className="text-4xl font-bold tracking-tight text-gray-900 sm:text-6xl">
