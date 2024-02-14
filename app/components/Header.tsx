@@ -1,101 +1,149 @@
-'use client'
-
-import { Disclosure } from '@headlessui/react'
-import { AiFillGithub, AiFillLinkedin, AiOutlineClose, AiOutlineMenu} from 'react-icons/ai';
-
+"use client";
+import {
+  AiFillGithub,
+  AiFillLinkedin,
+  AiOutlineMenu,
+  AiOutlineClose,
+} from "react-icons/ai";
+import { useState } from "react";
+import { Dialog, Popover } from "@headlessui/react";
+import Link from "next/link";
+import { clsx } from 'clsx';
 
 const navigation = [
-  { name: 'Projects', href: '#',  current: true },
-  { name: 'Experience', href: '#', current: false},
-  { name: 'Blog', href: '#', current: false},
-]
-
-function classNames(...classes : string[]) {
-  return classes.filter(Boolean).join(' ')
-}
+  { name: "Experience", href: "#experience", current: false },
+  { name: "My Skills", href: "#skills", current: true },
+  { name: "Blog", href: "#", current: false },
+];
 
 export default function Header() {
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
+  const closeMenu = () => setMobileMenuOpen(false)
+
+
   return (
-    <Disclosure as="nav" className="bg-gray-800">
-      {({ open }) => (
-        <>
-          <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
-            <div className="relative flex h-16 items-center justify-between">
-              <div className="absolute inset-y-0 left-0 flex items-center sm:hidden">
-                {/* Mobile menu button*/}
-                <Disclosure.Button className="relative inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white">
-                  <span className="absolute -inset-0.5" />
-                  <span className="sr-only">Open main menu</span>
-                  {open ? (
-                    <AiOutlineClose className="block h-6 w-6" color="white" aria-hidden="true" />
-                  ) : (
-                    <AiOutlineMenu className="block h-6 w-6" color="white" aria-hidden="true" />
-                  )}
-                </Disclosure.Button>
+    <header className={clsx('bg-white sticky top-0', !mobileMenuOpen && 'z-50')}>
+      <nav
+        className="mx-auto flex max-w-7xl items-center justify-between p-1 lg:px-8"
+        aria-label="Global"
+      >
+        <div className="flex lg:flex-1">
+          <Link
+            href="#"
+            className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
+          >
+            JAOP
+          </Link>
+        </div>
+        <div className="flex lg:hidden">
+          <button
+            type="button"
+            className="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-gray-700"
+            onClick={() => setMobileMenuOpen(true)}
+          >
+            <span className="sr-only">Open main menu</span>
+            <AiOutlineMenu className="h-6 w-6" aria-hidden="true" />
+          </button>
+        </div>
+        <Popover.Group className="hidden lg:flex lg:gap-x-12">
+          {navigation.map((element) => (
+            <a
+              href={element.href}
+              className="text-sm font-semibold leading-6 text-gray-900"
+            >
+              {element.name}
+            </a>
+          ))}
+        </Popover.Group>
+        <div className="hidden lg:flex lg:flex-1 lg:justify-end">
+          <a
+            href="https://www.linkedin.com/in/jaop/"
+            target="_blank"
+            className=" block rounded-lg px-3  text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
+          >
+            <AiFillLinkedin className="h-6 w-6" aria-hidden="true" />
+          </a>
+          <a
+            href="https://github.com/julioortizpol"
+            target="_blank"
+            className="block rounded-lg px-3  text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
+          >
+            <AiFillGithub className="h-6 w-6" aria-hidden="true" />
+          </a>
+          <a
+            href="CV.pdf"
+            target="_blank"
+            className=" block rounded-lg px-3 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
+          >
+            CV
+          </a>
+        </div>
+      </nav>
+      <Dialog
+        as="div"
+        className="lg:hidden"
+        open={mobileMenuOpen}
+        onClose={setMobileMenuOpen}
+      >
+        <div className="fixed inset-0 z-10" />
+        <Dialog.Panel className="fixed inset-y-0 right-0 z-10 w-full overflow-y-auto bg-white px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10">
+          <div className="flex items-center justify-between">
+          <Link
+            href="#"
+            className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
+            onClick={closeMenu}
+          >
+            JAOP
+          </Link>
+            <button
+              type="button"
+              className="-m-2.5 rounded-md p-2.5 text-gray-700"
+              onClick={() => setMobileMenuOpen(false)}
+            >
+              <span className="sr-only">Close menu</span>
+              <AiOutlineClose className="h-6 w-6" aria-hidden="true" />
+            </button>
+          </div>
+          <div className="mt-6 flow-root">
+            <div className="-my-6 divide-y divide-gray-500/10">
+              <div className="space-y-2 py-6">
+                {navigation.map(element => 
+                   <Link
+                   href={element.href}
+                   className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
+                   onClick={closeMenu}
+                 >
+                   {element.name}
+                 </Link>)}
               </div>
-              <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
-                <div className="flex flex-shrink-0 items-center">
-                  JAOP
-                </div>
-                <div className="hidden sm:ml-6 sm:block">
-                  <div className="flex space-x-4">
-                    {navigation.map((item) => (
-                      <a
-                        key={item.name}
-                        href={item.href}
-                        className={classNames(
-                          item.current ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white',
-                          'rounded-md px-3 py-2 text-sm font-medium'
-                        )}
-                        aria-current={item.current ? 'page' : undefined}
-                      >
-                        {item.name}
-                      </a>
-                    ))}
-                  </div>
-                </div>
-              </div>
-              <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0 gap-2">
-                <button
-                  type="button"
-                  className="relative rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
+              <div className="py-6">
+                <Link
+                  onClick={closeMenu}
+                  href="#"
+                  className="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
                 >
-                  <span className="absolute -inset-1.5" />
-                  <AiFillGithub className="h-6 w-6" aria-hidden="true" />
-                </button>
-
-                <button
-                  type="button"
-                  className="relative rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
-                >
-                  <span className="absolute -inset-1.5" />
                   <AiFillLinkedin className="h-6 w-6" aria-hidden="true" />
-                </button>
-
+                </Link>
+                <Link
+                  onClick={closeMenu}
+                  href="#"
+                  className="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
+                >
+                  <AiFillGithub className="h-6 w-6" aria-hidden="true" />
+                </Link>
+                <Link
+                  onClick={closeMenu}
+                  href="#"
+                  className="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
+                >
+                  CV
+                </Link>
               </div>
             </div>
           </div>
-
-          <Disclosure.Panel className="sm:hidden">
-            <div className="space-y-1 px-2 pb-3 pt-2">
-              {navigation.map((item) => (
-                <Disclosure.Button
-                  key={item.name}
-                  as="a"
-                  href={item.href}
-                  className={classNames(
-                    item.current ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white',
-                    'block rounded-md px-3 py-2 text-base font-medium'
-                  )}
-                  aria-current={item.current ? 'page' : undefined}
-                >
-                  {item.name}
-                </Disclosure.Button>
-              ))}
-            </div>
-          </Disclosure.Panel>
-        </>
-      )}
-    </Disclosure>
-  )
+        </Dialog.Panel>
+      </Dialog>
+    </header>
+  );
 }
