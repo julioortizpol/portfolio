@@ -42,7 +42,7 @@ const techSnipets = (tech: string, Icon: IconType) => (
 
 export default function TechSection() {
   return (
-    <div className="bg-white mt-12 grid grid-cols-5  gap-4">
+    <div className="bg-white mt-12 grid md:grid-cols-3 lg:grid-cols-5  gap-4">
       {techs.map(({ tech, Icon }, index) => (
         <>{techSnipets(tech, Icon)}</>
       ))}

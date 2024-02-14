@@ -28,7 +28,7 @@ export default function Header() {
         className="mx-auto flex max-w-7xl items-center justify-between p-1 lg:px-8"
         aria-label="Global"
       >
-        <div className="flex lg:flex-1">
+        <div className="flex lg:flex-1 ml-2 lg:mr-0">
           <Link
             href="#"
             className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
