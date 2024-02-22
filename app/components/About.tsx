@@ -1,6 +1,6 @@
 
   const stats = [
-    { name: 'Years of experience as software Ingenier', value: '+5' },
+    { name: 'Years of experience as software Engineer', value: '+5' },
     { name: 'Years of experience as Front end developer', value: '+5' },
     { name: 'Years of experience as backend developer', value: '+3' },
   ]
@@ -37,7 +37,7 @@
             <h2 className="text-4xl font-bold tracking-tight text-black sm:text-6xl">Julio A. Ortiz Pol</h2>
             <p className="mt-6 text-lg leading-8 text-black">
            Im passionate about learning and innovating. Currently very experienced in Front End development, 
-           with a expert level in JavaScript and React.
+           with an expert level in JavaScript and React.
             </p>
           </div>
           <div className="mx-auto max-w-2xl lg:mx-0 lg:max-w-none">
